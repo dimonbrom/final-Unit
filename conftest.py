@@ -7,7 +7,7 @@ def pytest_addoption(parser):
     parser.addoption('--language', action='store', default='en', help='Choose language')
 
 
-@pytest.fixture(scope="function")
+@pytest.fixture(scope = "class")
 def browser(request):
     # В переменную user_language передается параметр из командной строки
     user_language = request.config.getoption('language')
@@ -19,6 +19,6 @@ def browser(request):
     options.add_experimental_option('prefs', {'intl.accept_languages': user_language})
     browser = webdriver.Chrome(options=options)
     
-    browser.implicitly_wait(5)
+    browser.implicitly_wait(30)
     yield browser
     browser.quit()
