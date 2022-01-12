@@ -1,5 +1,6 @@
 import pytest
 from .pages.product_page import ProductPage
+from .pages.basket_page import BasketPage
 
 @pytest.mark.parametrize('direct', ["offer0","offer1","offer2","offer3","offer4","offer5","offer6",pytest.param("offer7", marks=pytest.mark.xfail),"offer8","offer9"])
 
@@ -54,7 +55,15 @@ def test_guest_can_go_to_login_page_from_product_page(browser):
     page.open()
     page.go_to_login_page()
     
-    
-    
+
+
+@pytest.mark.new
+def test_guest_cant_see_product_in_basket_opened_from_main_page(browser):
+    link = "http://selenium1py.pythonanywhere.com/ru/catalogue/hacking-exposed-wireless_208/"
+    page = BasketPage (browser, link)
+    page.open()
+    page.go_to_basket()
+    page.cheking_that_empty_basket()
+    page.checking_that_there_text()
     
 
